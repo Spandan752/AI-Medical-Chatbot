@@ -3,9 +3,11 @@ import uvicorn
 from pydantic import BaseModel
 import os
 from dotenv import load_dotenv
+
 from src.helper import download_embeddings
 from src.prompts import system_prompt
 from src.llm import model
+
 from langchain_pinecone import PineconeVectorStore
 from pinecone import Pinecone
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -13,10 +15,12 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 
+
 load_dotenv()
 
 app = FastAPI()
 
+# ----------Schemas-----------
 # Request Schema
 class QueryRequest(BaseModel):
   input: str
@@ -31,6 +35,8 @@ class QueryResponse(BaseModel):
 # os.environ["PINECONE_API_KEY"] = PINECONE_API_KEY
 # os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
+
+# -----------Vector Store and RAG Chain Setup------------
 
 embedding_model = download_embeddings()
 
@@ -57,6 +63,7 @@ rag_chain = (
     | StrOutputParser()
 )
 
+# --------------API Endpoints----------------
 
 @app.get("/")
 def health_check():

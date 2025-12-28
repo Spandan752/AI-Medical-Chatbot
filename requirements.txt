@@ -9,3 +9,4 @@ pypdf
 dotenv
 pinecone
 langchain_google_genai
+streamlit
