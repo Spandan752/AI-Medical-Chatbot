@@ -6,7 +6,7 @@ fastapi
 uvicorn
 sentence-transformers
 pypdf
-dotenv
-pinecone
+python-dotenv
+pinecone-client
 langchain_google_genai
 streamlit
