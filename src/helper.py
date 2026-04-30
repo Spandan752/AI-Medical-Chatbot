@@ -3,7 +3,9 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from typing import List
 from langchain_core.documents import Document
 from langchain_community.embeddings import HuggingFaceEmbeddings
+import os
 
+EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL')
 
 def load_pdf_files(data):
 #   loader = PyPDFLoader(data)
@@ -27,6 +29,6 @@ def text_splitter(minimal_docs):
 
 def download_embeddings():
   embeddings = HuggingFaceEmbeddings(
-      model_name = "sentence-transformers/all-MiniLM-L6-v2"
+      model_name = EMBEDDING_MODEL
   )
   return embeddings

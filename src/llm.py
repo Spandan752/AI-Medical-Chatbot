@@ -1,11 +1,20 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
-from dotenv import load_dotenv
-import os
+from config import settings, get_logger
+# from dotenv import load_dotenv
+# import os
 
-load_dotenv()
-GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+logger = get_logger(__name__)
+logger.info(f"Initializing LLM model: {settings.MODEL_NAME}")
+
+
+# load_dotenv()
+# GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+# MODEL_NAME = os.getenv('MODEL_NAME')
+
 model = ChatGoogleGenerativeAI(
-    api_key = GOOGLE_API_KEY,
-    model = "gemini-2.5-flash",
-    temperature= 1.0
+    api_key = settings.GOOGLE_API_KEY,
+    model = settings.MODEL_NAME,
+    temperature= settings.MODEL_TEMPERATURE
 )   
+
+logger.info("LLM model initialized successfully")
