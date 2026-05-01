@@ -49,14 +49,14 @@ class Settings(BaseSettings):
     RATE_LIMIT_REQUESTS: int = int(os.getenv("RATE_LIMIT_REQUESTS", 100))
     RATE_LIMIT_WINDOW_SECONDS: int = int(os.getenv("RATE_LIMIT_WINDOW_SECONDS", 60))
 
-    @field_validator("GOOGLE_API_KEY", pre=True, always=True)
+    @field_validator("GOOGLE_API_KEY")
     def validate_google_api_key(cls, v):
         """Validate that Google API key is set in production."""
         if not v and os.getenv("ENVIRONMENT") == "production":
             raise ValueError("GOOGLE_API_KEY must be set in production")
         return v
 
-    @field_validator("PINECONE_API_KEY", pre=True, always=True)
+    @field_validator("PINECONE_API_KEY")
     def validate_pinecone_api_key(cls, v):
         """Validate that Pinecone API key is set in production."""
         if not v and os.getenv("ENVIRONMENT") == "production":

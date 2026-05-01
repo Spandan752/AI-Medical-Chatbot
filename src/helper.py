@@ -2,10 +2,12 @@ from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from typing import List
 from langchain_core.documents import Document
-from langchain_community.embeddings import HuggingFaceEmbeddings
+# from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 import os
+from config import settings
 
-EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL')
+# EMBEDDING_MODEL = os.getenv('EMBEDDING_MODEL')
 
 def load_pdf_files(data):
 #   loader = PyPDFLoader(data)
@@ -29,6 +31,6 @@ def text_splitter(minimal_docs):
 
 def download_embeddings():
   embeddings = HuggingFaceEmbeddings(
-      model_name = EMBEDDING_MODEL
+      model_name = settings.EMBEDDING_MODEL
   )
   return embeddings
